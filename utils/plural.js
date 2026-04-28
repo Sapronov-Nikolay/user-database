@@ -167,7 +167,7 @@ function getAlivesStatus(gender) {
   if (gender === 'male')
     return 'Жив';
   // Если род не определён или не указан
-  return 'Живо'
+  return 'Живо';
 }
 
 /**
