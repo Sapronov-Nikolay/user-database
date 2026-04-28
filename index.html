@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="image/x-icon" rel="shortcut icon" href="connecting.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Коннектор файлов (модульный)</title>
+</head>
+<body>
+  <div id="app">
+    <h1>🔗 Коннектор файлов</h1>
+
+    <p style="text-align: center; color: #7f8c8d; margin-bottom: 25px;">
+      Проект демонстрирует подключение нескольких JS файлов и работу с их данными
+    </p>
+
+    <div class="button-container">
+      <button id="load-data">Загрузить данные</button>
+      <!-- Остальные кнопки создаст JavaScript -->
+    </div>
+
+    <div id="output">
+      <p style="text-align: center; color: #95a5a6; padding: 40px;">
+        Нажмите "Загрузить данные", чтобы увидеть результат работы JavaScript
+      </p>
+    </div>
+
+    <div style="margin-top: 30px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+      <h3 style="color: #2c3e50; margin-bottom: 10px">📝 Что происходит:</h3>
+      <ol style="color: #7f8c8d; padding-left: 20px;">
+        <li>Загружается <code>data.js</code> с массивом пользователей</li>
+        <li>Загружается <code>utils/*.js</code> С логикой приложения</li>
+        <li>Загружаются исторические модули: <code>historical/*.js</code></li>
+        <li>Загружаются <code>statistics.js</code> и <code>ui.js</code></li>
+        <li><code>app.js</code> инициализирует приложение</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ВАЖНО: порядок подключения! -->
+  <!-- 1. Данные -->
+  <script src="data.js"></script>
+  <!-- 2. Утилиты -->
+  <script src="utils/random.js"></script>
+  <script src="utils/plural.js"></script>
+  <script src="utils/dates.js"></script>
+  <!-- 3. Исторические модули -->
+  <script src="historical/periods.js"></script>
+  <script src="historical/phones.js"></script>
+  <script src="historical/emails.js"></script>
+  <script src="historical/cleaner.js"></script>
+  <!-- 4. Статистика -->
+  <script src="statistics.js"></script>
+  <!-- 5. UI и точка входа -->
+  <script src="ui.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

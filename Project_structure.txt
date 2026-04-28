@@ -1,0 +1,20 @@
+User_database/
+├── historical
+│   ├── cleaner.js
+│   ├── emails.js
+│   ├── periods.js
+│   └── phones.js
+├── utils
+│   ├── dates.js
+│   ├── plural.js
+│   └── random.js
+├── app.js
+├── connecting.png
+├── data.js
+├── index.html
+├── info.txt
+├── readmi.txt
+├── statistics.js
+├── structure_app.py
+├── style.css
+└── ui.js
