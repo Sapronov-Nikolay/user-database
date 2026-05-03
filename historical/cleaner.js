@@ -38,7 +38,7 @@ function couldHavePhone(birthYear) {
   Принимает исходного пользователя и возвращает его копию с исправлениями email, телефоном и профессией
   в зависимости от года его активности, а также добавляет статус жизни с учётом пола.
 
-  @param {object} user - Объект пользователя (должен содержать birhtDate, deathDate, city, email, phone, profession).
+  @param {object} user - Объект пользователя (должен содержать birthDate, deathDate, city, email, phone, profession).
   @returns {object} - Очищенный объект (копия).
 */
 function cleanHistoricalData(user) {
@@ -50,7 +50,7 @@ function cleanHistoricalData(user) {
       чтобы избежать ошибок в последующих шагах.
   */
   const birthDate = parseDate(user.birthDate);
-  if (!birhtDate) {
+  if (!birthDate) {
     console.warm('⚠️ cleanHistoricalData: некорректная дата рождения, пользователь не обработан');
     return user;
   }
@@ -175,6 +175,7 @@ function cleanHistoricalData(user) {
     */
     cleanedUser.phone = `Ранний телефонный номер (пример: ${Math.floor(Math.random() * 900) + 100})`;
   } else if (lastActiveYear < 1993) {
+    cleanedUser.phone = getHistoricalPhoneNumber(lastActiveYear, user.city);
     // Исторический период (1910-1992):
     /**
       Номера формировались с учётом региона/города.
@@ -193,7 +194,7 @@ function cleanHistoricalData(user) {
       - Учитывать региональные коды, характерные для user.city
     */
     if (!user.phone || user.phone === "") {
-      cleanedUser.user = getHistoricalPhoneNumber(lastActiveYear, user.city);
+      cleanedUser.phone = getHistoricalPhoneNumber(lastActiveYear, user.city);
     } else {
       // иначе сохраняем реальный номер, если он есть в исходных кодах
       /**
@@ -242,7 +243,7 @@ function cleanHistoricalData(user) {
       // - 1800-1920: купеческая деятельность
       else if (lay < 1920) return "Купец";
       // - 1920-1960: товароведческий контроль
-      else if (lay < 1960) "Товаровед";
+      else if (lay < 1960) return "Товаровед";
       // - 1960-1990: Экономист по сбыту
       else if (lay < 1990) return "Экономист по сбыту";
       else return "Маркетолог";
