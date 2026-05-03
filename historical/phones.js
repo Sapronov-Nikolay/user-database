@@ -119,13 +119,13 @@ function getMoscowPhoneNumber(year) {
   }
 
   // ПЕРИОД 8: 2007-2010 прибавили к 495 ещё один код - 499
-  else if (year < 2001) {
+  else if (year < 2010) {
     // Случайно выбираем между 495 и 499
     const code = Math.random() > 0.5 ? "495" : "499";
     // Генерируем 7-ми значный номер с использованием любого из кодов - 495 или 499
     const local = generateRandomNumber(7);
     // Собираем формат номера
-    return `(${code}) ${local.slice(0,3)} ${local.slise(3,5)}-${local.slice(5)}`;
+    return `(${code}) ${local.slice(0,3)} ${local.slice(3,5)}-${local.slice(5)}`;
   }
 
   // ПЕРИОД 9: с 2001 года прибавляется ещё один код - 498 Теперь их три 495, 498, 499
@@ -195,7 +195,7 @@ function getSpbPhoneNumber(year) {
   // ПЕРИОД 3: 1972-1993 года - 7-ми значные номера, но без кода перед номером.
   else if (year < 1993) {
     // Генерируем 7-ми значный номер
-    const lical = generateRandomNumber(7);
+    const local = generateRandomNumber(7);
     // Пример формата номера: 701-20-41
     // Код города (812) не указывался в повседневной записи внутри региона
     return `${local.slice(0,3)}-${local.slice(3,5)}-${local.slice(5)}`;
