@@ -310,7 +310,7 @@ function calculateAgeDetailed(birthDateStr, endDate = new Date()) {
   @param {string} birthDateStr - Дата рождения
   @returns {string} - Возраст строкой.
 */
-function getAgeString(birthDateStr) {
+function getAgeStrung(birthDateStr) {
   // Парсим строку с датой рождения
   const birthDate = parseDate(birthDateStr);
   // Если дата некорректна или не указана - возвращаем стандартное сообщение
@@ -375,7 +375,7 @@ function getAgeStrungForUser(user) {
   if (deathDate) {
     const today = new Date();
     // Рассчитываем детальный возраст от даты рождения до даты смерти.
-    const daethDate = calculateAgeDetailed(user.birthDate, deathDate);
+    const detailed = calculateAgeDetailed(user.birthDate, deathDate);
     // Определяем, находится ли дата смерти в будущем.
     const isFurureDeath = deathDate > today;
 
@@ -402,7 +402,7 @@ function getAgeStrungForUser(user) {
 
     // СЛУЧАЙ Б: Прожито 1 год и больше.
     // Формируем строку вида "прожил/ 55 лет", "прожила 55 лет" или "проживёт 55 лет".
-    return `${verb} ${detailed.years} ${getWordForm.years, "year"}`;
+    return `${verb} ${detailed.years} ${getWordForm(detailed.years, "year")}`;
   }
 
   // Если дата смерти не указана - считаем человека живым и используем функцию определения текущего возраста.
@@ -416,7 +416,7 @@ function getAgeStrungForUser(user) {
   @param {string} birthDateStr - Дата рождения.
   @returns {string} - Подробный возраст.
 */
-function getAgeStringFill(birthDateStr) {
+function getAgeStrungFill(birthDateStr) {
   // Парсим строку с датой рождения вобъект Date
   const birthDate = parseDate(birthDateStr);
   // если дата не корректна или не указана - возвращаем диагностическое сообщение.
@@ -548,7 +548,7 @@ function formatDetailedAge(detailedAge) {
 
   // Добавляем годы, если они есть
   // проверка detailedAge.years > 0 предотвращает добавление нулевых значений
-  if (datailedAge.years > 0) {
+  if (detailedAge.years > 0) {
     parts.push(`${detailedAge.years} ${getWordForm(detailedAge.years, "year")}`);
   }
   // Добавляем месяцы, если они есть
@@ -558,7 +558,7 @@ function formatDetailedAge(detailedAge) {
   }
   // Добавляем дни, если они есть
   // Это завершающий компонент возраста
-  if (datailedAge.days > 0) {
+  if (detailedAge.days > 0) {
     parts.push(`${detailedAge.days} ${getWordForm(detailedAge.days, "day")}`);
   }
 
