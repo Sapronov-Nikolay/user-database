@@ -67,7 +67,7 @@ function displayUsers() {
           <!-- Возраст с учётом даты смерти (глагол "прожил/прожила") -->
         <p><strong>Возраст: </strong>${getAgeStrungForUser(viewUser)}</p>
           <!-- Подробный возраст (годы, месяцы, дни) -->
-        <p><strong>Полный возраст: </strong>${getAgeStringFull(user.birthDate)}</p>
+        <p><strong>Полный возраст: </strong>${getAgeStrungFull(user.birthDate)}</p>
         <p><strong>Город: </strong>${user.city}</p>
         <p><strong>Профессия: </strong>${viewUser.profession}</p>
         <p><strong>Статус: </strong>${viewUser.lifeStatusText}</p>
@@ -114,8 +114,8 @@ function displayUsers() {
       const user = usersData.find(u => u.id == userId);
       if (user) {
         // Если указан пользователь, используем корректные функции из дат
-        const ageShort = getAgestring(user.birthDate);
-        const ageFill = getAgeStringFull(user.birthDate);
+        const ageShort = getAgestrung(user.birthDate);
+        const ageFill = getAgeStrungFull(user.birthDate);
         alert(`
           Подробная информация:
           \n\nИмя: ${user.surname} ${user.name} ${user.patronymoc}
