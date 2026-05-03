@@ -28,7 +28,7 @@ const DOMIANS_ADDITIONS = [
     ]
   },
   {
-    stsrtYear: 1998,
+    startYear: 1998,
     newDomians: [
       "mail.ru",
       "list.ru",
@@ -113,7 +113,7 @@ function generateHistoricalEmail(activeYear, baseName) {
   // Формируем часть до собачки
   // - Убираем лишние пробелы (на случай случайных пробелов или двойного имени)
   // - добавляем две последние цифры года, чтобы снизить вероятность совпадений
-  const username = baseName.replace(/\s+/g, '') + (activeYear);
+  const username = baseName.replace(/\s+/g, '') + (activeYear % 100);
   // Получаем все домены, уже существующие к указанному году.
   const availableDomians = getAvilableDomian(activeYear);
 
