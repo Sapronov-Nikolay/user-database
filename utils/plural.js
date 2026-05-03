@@ -97,7 +97,7 @@ function getWordForm(number, formName) {
   const form = wordForms[formName];
 
   // ШАГ 2: Если формы нет в библиотеке - выводим предупреждение и возвращаем пустую строку.
-  if (!forms) {
+  if (!form) {
     console.warm(`⚠️ Нет формы для "${formName}`);
     return pluralForm(number, ["", "", ""]);
   }
@@ -498,7 +498,7 @@ function declineFullName(user, gramaticalCase, options = {}) {
           pat = patronymic.replace(/на$/, 'ной'); // "Владимировна" → "Владимировной"
           break;
         case 'nominative':    // Именительный падеж (кто? что?)
-        defoult:
+        default:
           pat = patronymic;   // Именительный падеж не нуждается в переделке окончаний - replace() не требуется
       }
     }
