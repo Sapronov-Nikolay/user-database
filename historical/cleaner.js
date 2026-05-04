@@ -370,16 +370,21 @@ function cleanHistoricalData(user) {
   }
 
   // ---------- ВОЗРАСТНЫЕ СТАТУСЫ ДЛЯ ДЕТЕЙ И ПОДРОСТКОВ ----------
-  // Если профессия отсутствует или была сброшена, определяем статус по возрасту
-  if (!cleanedUser.profession || cleanedUser.profession === "") {
-    if (currentAgeInYears < 8) {
-      // сюда мы не попадём из-за раннего return, но оставим для страховки
-      cleanedUser.profession = "нет";
-    } else if (currentAgeInYears < 16) {
-      cleanedUser.profession = getEducationStatus('schoolboy', cleanedUser.gender);
-    } else if (currentAgeInYears < 18) {
+// Если профессия отсутствует или была сброшена, определяем статус по возрасту
+  if (currentAgeInYears < 8) {
+    // сюда мы не попадём из-за раннего return, но оставим для страховки
+    cleanedUser.profession = "нет";
+    // Дети до 16 лет всегда получают "школьник"/"школьница", даже если профессия указана
+  } else if (currentAgeInYears < 16) {
+    cleanedUser.profession = getEducationStatus('schoolboy', cleanedUser.gender);
+    // Для 16‑17 лет: если профессия не указана — "студент"/"студентка", иначе оставляем указанную
+  } else if (currentAgeInYears < 18) {
+    if (!cleanedUser.profession || cleanedUser.profession === "") {
       cleanedUser.profession = getEducationStatus('student', cleanedUser.gender);
-    } else {
+    }
+    // 18 лет и старше: если профессия не указана — "безработный"/"безработная"
+  } else {
+    if (!cleanedUser.profession || cleanedUser.profession === "") {
       cleanedUser.profession = getEducationStatus('unemployed', cleanedUser.gender);
     }
   }

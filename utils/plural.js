@@ -194,19 +194,19 @@ function getDiedStatus(gender) {
   @param {string} gender - "male" или "female".
   @returns {string} - Статус с учётом рода.
 */
-function getEducationStatus(stetus, gender) {
+function getEducationStatus(status, gender) {
   if (gender === 'female') {
     switch (status) {
-      case 'schoolboy': return 'школьница';
-      case 'student': return 'студентка';
-      case 'unemployed': return 'безработная';
+      case 'schoolboy': return 'Школьница';
+      case 'student': return 'Студентка';
+      case 'unemployed': return 'Безработная';
       default: return status;
     }
   } else {
     switch (status) {
-      case 'schoolboy': return 'школьник';
-      case 'student': return 'студент';
-      case 'unemployed': return 'безработный';
+      case 'schoolboy': return 'Школьник';
+      case 'student': return 'Студент';
+      case 'unemployed': return 'Безработный';
       default: return status;
     }
   }
