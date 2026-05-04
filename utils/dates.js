@@ -478,7 +478,7 @@ function getAgeStrungFull(birthDateStr) {
       parts.push(`${remMonths} ${getWordForm(remMonths, "month")}`);
     }
     // Вычисляем оставшиеся дни (после вычета месяцев)
-    const remDays = daysUntill % 30.44;
+    const remDays = Math.round(daysUntill % 30.44);
     // Если оставшееся время больше дня
     if (remDays > 0) {
       parts.push(`${remDays} ${getWordForm(remDays, "day")}`);
