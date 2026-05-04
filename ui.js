@@ -61,15 +61,15 @@ function displayUsers() {
         <span class="user-badge">ID: ${user.id}</span>
       </div>
       <div class="user-card-body">
-        <p><strong>Эмейл: </strong>${viewUser.email}</p>
-        <p><strong>Телефон: </strong>${viewUser.phone}</p>
+        <p><strong>Эмейл: </strong>${viewUser.email === "нет" ? "отсутствует" : viewUser.email}</p>
+        <p><strong>Телефон: </strong>${viewUser.phone === "нет" ? "отсутствует" : viewUser.phone}</p>
         <p><strong>Дата рождения: </strong>${formatDate(viewUser.birthDate)}</p>
           <!-- Возраст с учётом даты смерти (глагол "прожил/прожила") -->
         <p><strong>Возраст: </strong>${getAgeStrungForUser(viewUser)}</p>
           <!-- Подробный возраст (годы, месяцы, дни) -->
         <p><strong>Полный возраст: </strong>${getAgeStrungFull(user.birthDate)}</p>
         <p><strong>Город: </strong>${user.city}</p>
-        <p><strong>Профессия: </strong>${viewUser.profession}</p>
+        <p><strong>Профессия: </strong>${viewUser.profession === "нет" ? "отсутствует" : viewUser.profession}</p>
         <p><strong>Статус: </strong>${viewUser.lifeStatusText}</p>
           <!-- Кликабельная эпоха -->
         <p><strong>Эпоха: </strong><span class="period-link"
