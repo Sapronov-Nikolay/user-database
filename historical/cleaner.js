@@ -376,11 +376,11 @@ function cleanHistoricalData(user) {
       // сюда мы не попадём из-за раннего return, но оставим для страховки
       cleanedUser.profession = "нет";
     } else if (currentAgeInYears < 16) {
-      cleanedUser.profession = "школьник";
+      cleanedUser.profession = getEducationStatus('schoolboy', cleanedUser.gender);
     } else if (currentAgeInYears < 18) {
-      cleanedUser.profession = "студент";
+      cleanedUser.profession = getEducationStatus('student', cleanedUser.gender);
     } else {
-      cleanedUser.profession = "безработный";
+      cleanedUser.profession = getEducationStatus('unemployed', cleanedUser.gender);
     }
   }
   

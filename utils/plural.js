@@ -186,6 +186,32 @@ function getDiedStatus(gender) {
   return 'Умерло';
 }
 
+/**
+  Возвращает правильную форму образовательного/трудового статуса в зависимости от пола пользователя.
+  Пример: мужчина → "школьник", женщина → "школьница".
+
+  @param {string} status - Тип статуса: 'schoolboy', 'student', 'unemployed'.
+  @param {string} gender - "male" или "female".
+  @returns {string} - Статус с учётом рода.
+*/
+function getEducationStatus(stetus, gender) {
+  if (gender === 'female') {
+    switch (status) {
+      case 'schoolboy': return 'школьница';
+      case 'student': return 'студентка';
+      case 'unemployed': return 'безработная';
+      default: return status;
+    }
+  } else {
+    switch (status) {
+      case 'schoolboy': return 'школьник';
+      case 'student': return 'студент';
+      case 'unemployed': return 'безработный';
+      default: return status;
+    }
+  }
+}
+
 
 
 /** 
