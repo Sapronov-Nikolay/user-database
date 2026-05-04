@@ -377,7 +377,7 @@ function getAgeStrungForUser(user) {
     // Рассчитываем детальный возраст от даты рождения до даты смерти.
     const detailed = calculateAgeDetailed(user.birthDate, deathDate);
     // Определяем, находится ли дата смерти в будущем.
-    const isFurureDeath = deathDate > today;
+    const isFutureDeath = deathDate > today;
 
     // Выбираем правильный глагол: "прожил/прожила" для прошлого, "проживёт" для будущего.
     let verb;
@@ -416,7 +416,7 @@ function getAgeStrungForUser(user) {
   @param {string} birthDateStr - Дата рождения.
   @returns {string} - Подробный возраст.
 */
-function getAgeStrungFill(birthDateStr) {
+function getAgeStrungFull(birthDateStr) {
   // Парсим строку с датой рождения вобъект Date
   const birthDate = parseDate(birthDateStr);
   // если дата не корректна или не указана - возвращаем диагностическое сообщение.

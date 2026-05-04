@@ -51,7 +51,7 @@ function cleanHistoricalData(user) {
   */
   const birthDate = parseDate(user.birthDate);
   if (!birthDate) {
-    console.warm('⚠️ cleanHistoricalData: некорректная дата рождения, пользователь не обработан');
+    console.warn('⚠️ cleanHistoricalData: некорректная дата рождения, пользователь не обработан');
     return user;
   }
 
@@ -126,7 +126,9 @@ function cleanHistoricalData(user) {
     - Используется для внвлиза активности (например, для расчёта продолжительности жизни или периода,
     в течение которого пользователь был активен).
   */
-  const lastActiveYear = deathDate ? deathDate.getFullYear() : new Date().getFullYear();
+  const lastActiveDate = deathDate || new Date();
+  const lastActiveYear = lastActiveDate.getFullYear();
+  const lastActiveMonth = lastActiveDate.getMonth() + 1; // январь = 1
 
 
   // ---------- ОБРАБОТКА EMAIL ----------
@@ -175,7 +177,7 @@ function cleanHistoricalData(user) {
     */
     cleanedUser.phone = `Ранний телефонный номер (пример: ${Math.floor(Math.random() * 900) + 100})`;
   } else if (lastActiveYear < 1993) {
-    cleanedUser.phone = getHistoricalPhoneNumber(lastActiveYear, user.city);
+    cleanedUser.phone = getHistoricalPhoneNumber(lastActiveYear, user.city, lastActiveMonth);
     // Исторический период (1910-1992):
     /**
       Номера формировались с учётом региона/города.
@@ -194,7 +196,7 @@ function cleanHistoricalData(user) {
       - Учитывать региональные коды, характерные для user.city
     */
     if (!user.phone || user.phone === "") {
-      cleanedUser.phone = getHistoricalPhoneNumber(lastActiveYear, user.city);
+      cleanedUser.phone = getHistoricalPhoneNumber(lastActiveYear, user.city, lastActiveMonth);
     } else {
       // иначе сохраняем реальный номер, если он есть в исходных кодах
       /**

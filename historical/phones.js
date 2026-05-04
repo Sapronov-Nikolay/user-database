@@ -11,7 +11,7 @@
   @param {number} year - Год.
   @returns {string} - Номер.
 */
-function getMoscowPhoneNumber(year) {
+function getMoscowPhoneNumber(year, month) {
   // ПЕРИОД 1: До 1930 - однозначно-двухзначные номера (2-15)
   if (year < 1930) {
     // Генерируем префикс от 1 до 5 - это первая цифра ("1-5"-XX)
@@ -111,7 +111,7 @@ function getMoscowPhoneNumber(year) {
   }
 
   // ПЕРИОД 7.2: Когда уже только 495
-  else if (year >= 2006) {
+  else if (year === 2005 || year === 2006) {
     // Генерируем уже гомер для использования его с кодом 495
     const local = generateRandomNumber(7);
     // Собираем вид формата номера уже с кодом 495
@@ -119,13 +119,13 @@ function getMoscowPhoneNumber(year) {
   }
 
   // ПЕРИОД 8: 2007-2010 прибавили к 495 ещё один код - 499
-  else if (year < 2010) {
+  else if (year <= 2010) {
     // Случайно выбираем между 495 и 499
     const code = Math.random() > 0.5 ? "495" : "499";
     // Генерируем 7-ми значный номер с использованием любого из кодов - 495 или 499
     const local = generateRandomNumber(7);
     // Собираем формат номера
-    return `(${code}) ${local.slice(0,3)} ${local.slice(3,5)}-${local.slice(5)}`;
+    return `(${code}) ${local.slice(0,3)}-${local.slice(3,5)}-${local.slice(5)}`;
   }
 
   // ПЕРИОД 9: с 2001 года прибавляется ещё один код - 498 Теперь их три 495, 498, 499
@@ -233,7 +233,7 @@ function generateHistoricalNumberForYear(year) {
     let number = generateRandomNumber(length);
     // Формируем взависимости от длины
     if (length === 4) {
-      return `${number.slice(0,2)}- ${number.slice(2)}`;
+      return `${number.slice(0,2)}-${number.slice(2)}`;
     }
     return number;
   }
@@ -322,7 +322,7 @@ function generateHistoricalNumberForYear(year) {
   @param {string} city - Город
   @returns {string} - Номер
 */
-function getHistoricalPhoneNumber(activeYear, city) {
+function getHistoricalPhoneNumber(activeYear, city, month = 1) {
   // Если год раньше изобретения телефона - возвращаем специальное сообщение
   if (activeYear < 1876) {
     return "Телефон ещё не был изобретён";
@@ -338,7 +338,7 @@ function getHistoricalPhoneNumber(activeYear, city) {
 
   // // Для Москвы — используем специальный генератор
   if (city === "Москва") {
-    return getMoscowPhoneNumber(activeYear);
+    return getMoscowPhoneNumber(activeYear, month);
   }
 
   // Для Санкт-Петербурга/Ленинграда - свой генератор

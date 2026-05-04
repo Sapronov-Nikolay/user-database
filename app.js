@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('✅ HTML загружен, начинаем инициализацию');
   // --- 1. Проверка наличия данных ---
   if (typeof usersData === 'undefined') {
-    console.error('❌ usersDate не определёна! проверьте data.js');
+    console.error('❌ usersData не определёна! проверьте data.js');
     return;
   }
 

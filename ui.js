@@ -17,7 +17,7 @@ function initUI() {
   // ШАГ 1: Получаем кнопку по ID
   loadButton = document.getElementById('load-data');
   // ШАГ 2: Получаем контейнер для карточек
-  outputConteiner = document.getElementById('output');
+  outputContainer = document.getElementById('output');
 
   // ШАГ 3: Если что-то не найдено - ошибка, дальше работать нельзя
   if (!loadButton || !outputContainer) {
@@ -77,7 +77,7 @@ function displayUsers() {
                                     data-period="${viewUser.historicalPeriod}">${viewUser.historicalPeriod}</span></p>
       </div>
       <div class="user-card-footer">
-        <button class="details-bth" data-id="${viewUser.id}">Подробнее</button>
+        <button class="details-btn" data-id="${viewUser.id}">Подробнее</button>
       </div>
     `;
     // Запускаем отрисовку
@@ -92,7 +92,7 @@ function displayUsers() {
   const {youngestUsers, oldestUsers, youngestDetailedAge, oldestDetailedAge} = findYoungestAndOldest();
 
   // Рассчитываем средний возраст в месяцах (для formatAverageAge)
-  const datailedages = usersData.map(u => calculateAgeDetailed(u.birthDate));
+  const detailedAges = usersData.map(u => calculateAgeDetailed(u.birthDate));
   const totalMonths = detailedAges.reduce((sum, age) => sum + age.years * 12 + age.months + age.days / 30.44, 0);
   const avgMonths = usersData.length ? totalMonths / usersData.length : 0;
 
@@ -114,11 +114,11 @@ function displayUsers() {
       const user = usersData.find(u => u.id == userId);
       if (user) {
         // Если указан пользователь, используем корректные функции из дат
-        const ageShort = getAgestrung(user.birthDate);
+        const ageShort = getAgeStrung(user.birthDate);
         const ageFill = getAgeStrungFull(user.birthDate);
         alert(`
           Подробная информация:
-          \n\nИмя: ${user.surname} ${user.name} ${user.patronymoc}
+          \n\nИмя: ${user.surname} ${user.name} ${user.patronymic}
           \nЭмейл: ${user.email}
           \nТелефон: ${user.phone}
           \nДата рождения: ${formatDate(user.birthDate)}
@@ -152,7 +152,7 @@ function resetDisplay() {
   console.log('🔄 Сброс отображения');
   // Возвращаем начальное сообщение
   outputContainer.innerHTML = `
-    <div stule="text-align:center;padding:40px;color:#7f8c8d;">
+    <div style="text-align:center;padding:40px;color:#7f8c8d;">
       <p>Данные не загружены</p>
       <p>Нажмите "Загрузить данные", чтобы отобразить информацию</p>
     </div>

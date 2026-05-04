@@ -81,7 +81,7 @@ function formatAverageAge(months) {
 
   // СЛУЧАЙ 2: Возраст меньше 1 года (1-11 месяца).
   else if (months < 12) {
-    const fullMonths = Meth.floor(months);
+    const fullMonths = Math.floor(months);
     const remainingDays = Math.round((months - fullMonths) * 30.44);
     if (remainingDays === 0) {
       return `${fullMonths} ${getWordForm(fullMonths, "month")}`;

@@ -98,12 +98,12 @@ function getWordForm(number, formName) {
 
   // ШАГ 2: Если формы нет в библиотеке - выводим предупреждение и возвращаем пустую строку.
   if (!form) {
-    console.warm(`⚠️ Нет формы для "${formName}`);
+    console.warn(`⚠️ Нет формы для "${formName}`);
     return pluralForm(number, ["", "", ""]);
   }
   
   // ШАГ 3: Вызываем универсальную pluralForm с найденным массивом форм
-  return pluralForm(number, forms);
+  return pluralForm(number, form);
 }
 
 /**
@@ -161,7 +161,7 @@ function getWillLiveWord(gender) {
   @param {string} gender - "male" или "female".
   @returns {string} - "Жив", "Жива" или "Живо" (если пол неизвестен).
 */
-function getAlivesStatus(gender) {
+function getAliveStatus(gender) {
   if (gender === 'female')
     return 'Жива';
   if (gender === 'male')

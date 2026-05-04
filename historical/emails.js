@@ -40,7 +40,7 @@ const DOMIANS_ADDITIONS = [
   {
     startYear: 2000,
     newDomians: [
-      "rembler.ru",
+      "rambler.ru",
       "yandex.ru",
       "mail.ua"
     ]
@@ -205,14 +205,14 @@ function validateUniqueEmails(users) {
       // Выводим подробную ошибку в консоль.
 
       // Склоняем ФИО первого владельца в творительном падеже (кем?)
-      const otherInstrumetntal = declineFullName(other, 'instrumental');
+      const otherInstrumental = declineFullName(other, 'instrumental');
       // Склоняем ФИО текущего пользователя в родительный падеж (для кого?)
       const currentGenitive = declineFullName(user, 'genitive');
 
       // Выводим сообщение о том что указанный эмэйл уже используется кем-то. И пишем кем именно
       console.error(
         `❌ Дубликат email: ${email} - уже используется пользователем` +
-        `${otherInstrumetntal} (ID: ${other.id}). ` +
+        `${otherInstrumental} (ID: ${other.id}). ` +
         `Нужен другой эмейл для пользователя ${currentGenitive} (ID: ${user.id})`
       );
 
