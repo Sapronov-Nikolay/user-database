@@ -129,6 +129,9 @@ function cleanHistoricalData(user) {
   const lastActiveDate = deathDate || new Date();
   const lastActiveYear = lastActiveDate.getFullYear();
   const lastActiveMonth = lastActiveDate.getMonth() + 1; // январь = 1
+  // --- Подсчитаем возраст на последний активный день ---
+  const ageDetails = calculateAgeDetailed(user.birthDate, lastActiveDate);
+  const currentAgeInYears = ageDetails.years;
 
 
   // ---------- ОБРАБОТКА EMAIL ----------
@@ -139,6 +142,17 @@ function cleanHistoricalData(user) {
       то сохраняется исходный email.
     - в противном случае генерится "исторический email", имитирующий адреса, характерные для денного периода.
   */
+
+  // ---------- БЛОКИРОВКА ДАННЫХ ДЛЯ МАЛЫШЕЙ ----------
+  // Дети до 8 лет ещё не могут иметь email, телефон и профессию
+  if (currentAgeInYears < 8) {
+    cleanedUser.email = "нет";
+    cleanedUser.phone = "нет";
+    cleanedUser.profession = "нет";
+    // Профессию не обрабатываем дальше, сразу переходим к возрасту
+    return cleanedUser;
+  }
+
   if (user.email && user.email !== "" && !user.email.includes("exemple")) {
     if (lastActiveYear >= 1995) {
       // Если пользователь активен в эпоху массовой почты - оставляем реальный email
@@ -353,6 +367,21 @@ function cleanHistoricalData(user) {
   // и заменяем современное название профессии на соответствующий исторический аналог, если этого требует период времени.
   if (professionMap[cleanedUser.profession]) {
     cleanedUser.profession = professionMap[cleanedUser.profession](lastActiveYear);
+  }
+
+  // ---------- ВОЗРАСТНЫЕ СТАТУСЫ ДЛЯ ДЕТЕЙ И ПОДРОСТКОВ ----------
+  // Если профессия отсутствует или была сброшена, определяем статус по возрасту
+  if (!cleanedUser.profession || cleanedUser.profession === "") {
+    if (currentAgeInYears < 8) {
+      // сюда мы не попадём из-за раннего return, но оставим для страховки
+      cleanedUser.profession = "нет";
+    } else if (currentAgeInYears < 16) {
+      cleanedUser.profession = "школьник";
+    } else if (currentAgeInYears < 18) {
+      cleanedUser.profession = "студент";
+    } else {
+      cleanedUser.profession = "безработный";
+    }
   }
   
   return cleanedUser; // Возвращает очищенный объект с преобразованными данными
